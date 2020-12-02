@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-02 10:42:24
- * @LastEditTime: 2020-12-02 15:13:29
+ * @LastEditTime: 2020-12-02 18:44:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \kVue\router+vuex原理\studyvue\src\store\kvuex.js
@@ -9,7 +9,6 @@
 let Vue;
 class Store {
     constructor(options) {
-        console.log('options', options);
         this.$options = options;
 
         this._mutations = options.mutations;
@@ -23,7 +22,6 @@ class Store {
 
         this.commit = this.commit.bind(this);
         this.dispatch = this.dispatch.bind(this);
-        // console.log(this.commit)
     }
 
     get state() {
@@ -35,7 +33,6 @@ class Store {
     }
 
     commit(type, payload) {
-        console.log('commit', this)
         const entry = this._mutations[type];
 
         if(!entry) {
@@ -47,7 +44,6 @@ class Store {
     }
 
     dispatch(type, payload) {
-        console.log(type)
         const entry = this._actions[type];
         
         if(!entry) {
@@ -55,7 +51,6 @@ class Store {
             return false;
         }
 
-        console.log(this)
         entry(this, payload);
     }
 }

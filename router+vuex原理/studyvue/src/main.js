@@ -5,7 +5,6 @@ import App from './App.vue'
 import router from './krouter'
 
 import store from './kstore'
-console.log(store)
 Vue.config.productionTip = false
 
 new Vue({
@@ -45,6 +44,10 @@ new Vue({
  *          
  *    6. router-view 和 router-link都是全局组件怎么注册的
  *          通过Vue.component方法注册全局组件
+ * 
+ *    7. 尝试解决嵌套路由
+ *          1. router-view深度标记
+ *          2. 路由匹配时获取代表深度层级的matched数组
  *    
  *  需求分析
  *    spa页面不能刷新
