@@ -1,12 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
+
 // import router from './router'
 import router from './krouter'
 
+import store from './kstore'
+console.log(store)
 Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
 
@@ -59,4 +63,15 @@ new Vue({
  *       - $router注册
  *       - 两个全局组件
  *  
+ * 
+ *  vuex: 
+ *    vue-vuex中使用commit提交mutation来修改state的原因解析
+ *    可以直接修改store.state.属性
+ *    在commit函数内部，由this._commit()函数来修改state，
+ *    _withCommit 函数的参数 fn 就是修改state的函数。在执行 fn() 之前，会将 this._committing 设置为 true。等到fn()执行完毕后，
+ *    又将 this._committing 的值进行恢复。那么为什么要将 this._withCommitting设置为true， 在vuex/src/store.js 的开头发现了判断严格模式的代码
+ *    当 vuex设置为严格模式的时候，就会执行 enableStrictMode 函数
+ *    在 enableStrictMode 函数内部，调用了 $watch 函数来观察 state的变化。当state变化时，就会调用 assert 函数，判断 store._committing（即 上文的 this._committing） 
+ *    的值，如果不为 true，就会报出异常
+ *    https://blog.csdn.net/zhq2005095/article/details/78359883
  */
