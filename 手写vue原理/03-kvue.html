@@ -1,0 +1,44 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-03 13:30:40
+ * @LastEditTime: 2020-12-03 16:33:42
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \kVue\手写vue原理\03-kvue.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <p>{{counter}}</p>
+    <p k-text="counter"></p>
+    <p k-html="counterLL" @click="click"></p>
+    <input k-model="counter" />
+</div>    
+</body>
+<script src="./kvue.js"></script>
+<script>
+    const app = new kvue({
+        el: '#app',
+        data: {
+            counter: 1,
+            counterLL: '<div>vue真香</div>'
+        },
+        methods: {
+            click() {
+                console.log('点击事件----')
+            }
+        }
+    })
+
+    // setInterval(() => {
+    //     app.counter++;
+    // }, 1000);
+</script>
+</html>
