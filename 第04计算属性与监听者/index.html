@@ -1,0 +1,64 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-07 10:36:12
+ * @LastEditTime: 2020-12-07 10:47:17
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \kVue\第04计算属性与生命周期\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="course"> 
+        <button @click="addCourses">添加</button>
+
+        <!-- 列表 -->
+        <div v-for="item in courses" :key="item">
+            {{item}}
+        </div>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            title: 'hello,vue',
+            course: '',
+            courses: []
+        },
+        computed: {
+            total() {
+                return this.courses.length + '门';
+            }
+        },
+        methods: {
+            addCourses() {
+               this.courses.push(this.course);
+               this.course = ''; 
+            }
+        },
+        watch: {
+            course: {
+                immediate: true,
+                handler(newV, oldV) {
+                    console.log(newV, oldV) // 改变前得值, 改变后的值
+                }
+            }
+        }
+    })
+    setTimeout(() => {
+        app.title = 'mua~,vue'
+    }, 1000);
+</script>
+
+</html>

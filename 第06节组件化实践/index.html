@@ -1,0 +1,110 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-07 10:36:12
+ * @LastEditTime: 2020-12-07 14:00:36
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \kVue\第04计算属性与生命周期\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 消息 -->
+        <c-message :show.sync="show">
+            新增课程成功
+        </c-message>
+        <!-- 添加 -->
+        <course-add @courses-add="coursesAdd"></course-add>
+
+        <!-- 列表 -->
+        <course-list :courses="courses" ></course-list>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+
+    // 实现列表组件
+    Vue.component('course-list', {
+        functional: true,
+        render(h, context) {
+            const { props } = context;
+            const { courses } = props;
+            if(courses.length === 0) return h('div', '暂无课程')
+            return h('div', {}, [
+                ...courses.map(item => {
+                    return h('div', item)
+                }),
+                h('div', `课程共:${courses.length}门`)
+            ])
+        }
+    })
+
+    // 实现添加组件
+    Vue.component('course-add', {
+        data() {
+            return {
+                course: ''
+            }
+        },
+        methods: {
+            addCourses() {
+                this.$emit('courses-add', this.course)
+                this.course = ''
+            }
+        },
+        template: `
+            <div>
+                <input v-model="course" @keydown.enter="addCourses"></input>
+                <button @click="addCourses">添加</button>    
+            </div>
+        `
+    })
+
+    // 消息组件
+    Vue.component('c-message', {
+        props: ['show'],
+        template: `
+            <div v-if="show">
+                <slot></slot>    
+            </div>
+        `,
+        watch: {
+            show(newValue, oldValue) {
+                if(newValue)  {
+                    setTimeout(() => {
+                        this.$emit('update:show', false)
+                    }, 1000);
+                } 
+            }
+        },
+    })
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            title: 'hello,vue',
+            course: '',
+            courses: [],
+            show: false
+        },
+        methods: {
+            coursesAdd(v) {
+                this.courses.push(v);
+                this.show = true
+            }
+        }
+    })
+    
+    
+</script>
+
+</html>
