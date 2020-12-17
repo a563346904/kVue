@@ -1,10 +1,21 @@
+/*
+ * @Author: your name
+ * @Date: 2020-12-01 15:48:35
+ * @LastEditTime: 2020-12-17 10:08:40
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \kVue\router+vuex原理\studyvue\src\main.js
+ */
 import Vue from 'vue'
 import App from './App.vue'
 
 // import router from './router'
 import router from './krouter'
 
+import '@/components/kTable'
+
 import store from './kstore'
+import './plugins/element.js'
 Vue.config.productionTip = false
 
 new Vue({
