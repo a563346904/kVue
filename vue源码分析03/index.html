@@ -1,0 +1,43 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-10 13:50:25
+ * @LastEditTime: 2020-12-10 14:33:11
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \kVue\vue源码分析03\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{counter}}
+    </div>
+</body>
+<script src="./kvue.js"></script>
+<script>
+    const app = new kvue({
+        el: '#app',
+        data: {
+            counter: 1
+        },
+        render(h) {
+            return h('div', { id: '#app' }, [
+                h('p', null, 'first blood ' + this.counter)
+            ])
+        },
+    })
+
+    setInterval(() => {
+        app.counter++;
+    }, 1000);
+</script>
+
+</html>
